@@ -1,0 +1,595 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body{
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #d4bfc8;
+    background-image: linear-gradient(180deg, rgb(27, 13, 13), #361d1d);
+}
+
+.list-container {
+    place-self: center;
+    background: url('me.jpeg') no-repeat center;
+    filter: brightness(5px);
+    background-size: cover;
+    width: 40rem;
+    height: 42rem;
+    border-radius: 2rem;
+    overflow-y: auto;
+    position: relative;
+}
+
+
+
+
+/* the container for the entire todo list */
+.theHead {
+    height: 30%;
+    background-image: linear-gradient(220deg,rgb(236, 119, 168), rgb(226, 116, 162),#e2819c, #ff7abf);
+    padding: 2rem 1rem;
+    color: white;
+    border-radius: 2rem 2rem 0 0;
+    z-index: 10000000;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.search{
+    position: relative;
+}
+
+.search input, .search i {
+    position: absolute;
+    right: 0;
+}
+
+label {
+    flex-grow: 2;
+}
+.search {
+    flex-grow: 3;
+}
+
+.search i {
+    color: rgb(250, 250, 250);
+    top: .5rem;
+    right: .25rem;
+    outline: .5rem;
+    z-index: 100;
+    transition: .2s ease;
+}
+
+.search i:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+}
+
+#searchBar.active{
+    color: black;
+}
+
+.search input[type='search'] {
+    opacity: 0;
+    width: 0;
+    height: 1.5rem;
+    border-radius: .5rem;
+    border: none;
+    padding: 1rem 1.5rem 1rem .2rem;
+    font-size: 1.2rem;
+}
+/* add a class toggle to the search for opening it  */
+.toggle {
+    animation: showInput .4s ease-in forwards;
+}
+@keyframes showInput {
+    0%{
+        width: 0;
+        opacity: 0;
+    }
+    50% {
+        opacity : 1;
+    }
+    100%{
+        width: 15rem;
+        opacity : 1;
+    }
+}
+
+
+.search input[type='search']:focus {
+    outline: none;
+}
+
+.title {
+
+    margin-top: 3rem;
+}
+
+#heading {
+    color: rgb(255, 255, 255);
+    display: inline;
+    max-width: 80%;
+    padding: 0;
+    margin: 0;
+    font-size: 1.5rem;
+    border: none;
+}
+#heading:focus {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.396);
+    outline: none;
+}
+
+.theHead .title{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title input::placeholder {
+    font-style: italic;
+    color: rgb(255, 255, 255);
+}
+
+.title i {
+    vertical-align: middle;
+    font-size: 1.5rem;
+    transition: .2s ease;
+}
+
+.title .fas:hover {
+    transform: scale(1.5);
+}
+
+label {
+    z-index: 10000000;
+    /* color: black; */
+}
+
+label span {
+    width: 2rem;
+    height: .25rem;
+    display: block;
+    margin-bottom: .2rem;
+    background-color: #fff;
+    transition: .4s ease;
+}
+
+label:hover span{
+    background-color: #c4c4c4;
+}
+
+input[type='checkbox'] {
+    display: none;
+}
+
+input:checked ~ label span:first-child{
+    transform: translateY(7px) rotateZ(45deg);
+    background-color: #393939;
+}
+input:checked ~ label span:nth-child(2){
+    opacity: 0;
+}
+input:checked ~ label span:last-child{
+    transform: translateY(-7px) rotateZ(-45deg);
+    background-color: #393939;
+}
+
+input:checked ~ .sideNav{
+    left: 0;
+}
+
+
+
+/* side nav section */
+.sideNav {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    background-color: #fff;
+    color: black;
+    padding-top: 15%;
+    width: 40%;
+    height: 100%;
+    z-index: 1000000;
+    transition: .4s ease;
+}
+
+.sideNav h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: #d66f8c;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #d66f8c1e;
+}
+
+.sideNav h3 i {
+    color: #d66f8c;
+    font-size: 2rem;
+}
+
+.sideNav p {
+    font-size: 1.1rem;
+    padding: .7rem 1rem;
+    transition: .2s ease;
+    border-bottom: 1px solid #d66f8c1e;
+}
+.sideNav p:hover {
+    background-color: #56494c;
+    color: white;
+}
+
+.sideNav p.active {
+    background-color: #b65772;
+    color: white;
+}
+
+
+
+/* input for adding new tasks */
+.newItems {
+    overflow: auto;
+    height: 70%;
+}
+
+
+input[type="text"] {
+    width: 100%;
+    height: 2rem;
+    margin-top: 1rem;
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
+    background-color: transparent;
+    padding: .5rem;
+    border-radius: .3rem;
+}
+input[type="text"]:focus {
+    background-color: #fff;
+    color: black;
+}
+input::placeholder {
+    color: white;
+}
+
+
+/* newly added task section */
+main {
+    padding: .5rem;
+}
+
+main input[type="checkbox"] {
+    vertical-align: text-bottom;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin: auto;
+    border-radius: 50%;
+    display: inline;
+}
+main input[type="checkbox"]:checked + label{
+    color: rgb(93, 93, 93);
+    text-decoration: line-through;
+}
+
+.item {
+    display: flex;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.264);
+    margin-bottom: .5rem;
+    border-radius: .5rem;
+    backdrop-filter: blur(7px);
+    padding: .7rem .4rem;
+    box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.405);
+    animation: showNewTask .2s ease-in  forwards;
+    transition: .2s ease;
+    
+}
+
+@keyframes showNewTask {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.removeTask {
+    animation: removeTask .4s ease-in  forwards;
+}
+
+@keyframes removeTask {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    50% {
+        opacity: 0;
+        transform: translateX(-110%);
+    }
+    100% {
+        transform: translateX(-110%);
+        display: none;
+    }
+}
+
+.item:hover {
+    background-color: rgba(205, 110, 172, 0.686);
+    backdrop-filter: blur(5px);
+    color: white;
+}
+
+.item label {
+    padding: .3rem .3rem;
+    flex-grow: 1;
+    padding-left: .5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-right: 2rem;
+    
+}
+
+.item .editCover {
+    align-self: flex-end;
+    visibility: hidden;
+}
+
+/* edit button */
+.item span.edit {
+    color: rgb(29, 33, 28);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: .5rem;
+    padding: .3rem .5rem;
+    transition: .1s ease;
+}
+
+/* close btn */
+.item span.close {
+    padding: .3rem .5rem;
+    color: rgb(234, 0, 0);
+    font-size: 1.5rem;
+    align-self: flex-end;
+    cursor: pointer;
+    transition: .1s ease;
+    
+}
+
+.item span:hover {
+    background-color: rgba(255, 255, 255, 0.827);
+    border-radius: .2rem;
+}
+
+.item:hover .editCover {
+    visibility: visible;
+    
+}
+
+
+/* Modal for deleting all tasks */
+#modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000000;
+    background: rgba(0, 0, 0, 0.59);
+    display: none;
+    animation: showModal .3s ease-in  forwards;
+}
+
+@keyframes showModal {
+    from {
+        opacity: 0;
+        transform: scale(.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal {
+    align-items: center;
+    padding: 1rem;
+    margin: auto;
+    width: fit-content;
+    background-color: #fff;
+    border-radius: .6rem;
+}
+
+.modal p {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgb(56, 56, 56);
+    font-family: sans-serif;
+}
+
+.modalButtonHolder {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .5rem 1.5rem;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: .2rem;
+    font-size: 1rem;
+    transition: .1s ease;
+}
+
+.modal button:hover {
+    background: #023c00;
+}
+
+.modal button:last-child {
+    background-color: red;
+    transition: .1s ease;
+}
+
+.modal button:last-child:hover {
+    background-color: rgb(49, 3, 3);
+}
+
+
+
+/* modal for editing task */
+.editIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000000;
+    background: rgba(0, 0, 0, 0.59);
+    display: none;
+    animation: showEdit .3s ease-in  forwards;
+}
+
+@keyframes showEdit {
+    from {
+        opacity: 0;
+        transform: scale(.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.editIconCover {
+    align-items: center;
+    padding: 1rem;
+    margin: auto;
+    width: fit-content;
+    background-color: #fff;
+    border-radius: .6rem;
+}
+.editIconCover p {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: rgb(56, 56, 56);
+    font-family: sans-serif;
+}
+
+.editIconCover input {
+    width: 100%;
+    border: 1px solid rgba(52, 52, 52, 0.222);
+    font-size: 1.2rem;
+    padding: .5rem;
+    color: black;
+}
+
+
+.editTaskButtonCover {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.editTaskButtonCover button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .5rem 2rem;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: .2rem;
+    font-size: 1rem;
+    transition: .1s ease;
+}
+
+.editTaskButtonCover button:hover {
+    background: #023c00;
+}
+
+.editTaskButtonCover button:last-child {
+    background-color: red;
+    transition: .1s ease;
+}
+
+.editTaskButtonCover button:last-child:hover {
+    background-color: rgb(49, 3, 3);
+}
+
+
+@media screen and (max-width: 700px){
+    .list-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    .theHead{
+        border-radius: 0;
+    }
+
+    #heading {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+    .theHead input[type="search"]{
+        font-size: 1rem;
+        padding: 0 2rem 0 .5rem;
+        border-radius: .2rem;
+    }
+
+    .item {
+        font-size: 1rem;
+    }
+
+    .item i {
+        font-size: 1rem;
+    }
+
+    .title i {
+        align-self: center;
+        vertical-align: sub;
+        font-size: 1.2rem;
+    }
+
+    .search i:hover {
+      transform: scale(1);
+      top: 20%;
+      cursor: pointer;
+    }
+    
+    .item .editCover {
+        visibility: visible;
+    }
+    
+    .sideNav {
+        width: 50%;
+    }
+    .sideNav p{
+        font-size: 1rem;
+    }
+    .sideNav h3{
+        margin-top: 4rem;
+    }
+
+    .editIcon p {
+        font-size: 1rem;
+        text-align: center;
+    }
+}
