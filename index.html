@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>list</title>
+    <link rel="stylesheet" href="list.css" />
+    <!-- <link rel="stylesheet" href="flipper/fontawesome-free-6.7.2-web/css/all.min.css"> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="list-container" id="listCover">
+      <div class="theHead">
+        <header>
+          <input type="checkbox" id="toggleLabel" />
+          <label for="toggleLabel">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+
+          <div class="sideNav" id="sideNav">
+            <h3><i class="fas fa-book"></i> ToDo</h3>
+            <p id="showAllTasks">All Tasks</p>
+            <p id="showPendingTasks">Pending Tasks</p>
+            <p id="showCompletedTasks">Completed Tasks</p>
+          </div>
+
+          <h3>To Do List</h3>
+          <div class="search">
+            <i id="searchBar" class="fas fa-search"></i>
+            <input type="search" name="search" autofocus id="searchBarInput" />
+          </div>
+        </header>
+
+        <!-- list title -->
+        <div class="title" id="toDoHeading">
+          <input type="text" id="heading" placeholder="Heading here..." />
+          <i class="fas fa-edit" id="editHeading" title="← Edit Heading"></i>
+          <i class="fas fa-trash" title="Delete all tasks?"></i>
+        </div>
+
+        <!-- input for adding new tasks -->
+        <input
+          id="addItem"
+          type="text"
+          placeholder="Add item here..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="newItems" id="newItems">
+        <!-- newly added tasks section -->
+        <main id="itemHolder">
+          <!-- item 1 -->
+          <!-- item 2 -->
+          <!-- item 3 -->
+        </main>
+      </div>
+    </div>
+
+    <!-- modal for deleting all taks validation -->
+    <div class="modalCover" id="modal">
+      <div class="modal">
+        <p>Delete all tasks?</p>
+
+        <div class="modalButtonHolder">
+          <button id="allTaskDelete">Yes</button>
+          <button id="modalCLose">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal for editing task -->
+    <div class="editIcon" id="editIcon">
+      <div class="editIconCover">
+        <p>Are you sure you want to edit task?</p>
+        <input type="text" id="editInput" autofocus />
+
+        <div class="editTaskButtonCover" id="editBtnCover">
+          <button id="yes">Yes</button>
+          <button id="no">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./list.js"></script>
+  </body>
+</html>
