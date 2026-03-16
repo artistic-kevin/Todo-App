@@ -86,6 +86,7 @@ label {
     border: none;
     padding: 1rem 1.5rem 1rem .2rem;
     font-size: 1.2rem;
+    display: inline-block;
 }
 /* add a class toggle to the search for opening it  */
 .toggle {
